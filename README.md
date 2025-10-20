@@ -322,3 +322,29 @@ docker run -d -p 50051:50051 your-dockerhub-username/grpc-calculator:v1
 - gRPC Python Quickstart: https://grpc.io/docs/languages/python/
 - Protocol Buffers language guide: https://developers.google.com/protocol-buffers/docs/proto3
 
+## Helper script: `docker.sh` — build & run a Python script in Docker
+
+For convenience there's a small script `docker.sh` that creates a minimal Docker build context for a given Python script, builds an image, and runs a container mapping port 50051.
+
+Usage:
+
+```bash
+# from project root
+./docker.sh path/to/script.py [image_name] [container_name]
+
+# Example using the included calculator server
+./docker.sh calculator_server.py
+```
+
+What it does:
+- Creates a temporary build context containing the script (and `requirements.txt` if present).
+- Writes a simple `Dockerfile` based on `python:3.10-slim`.
+- If `requirements.txt` exists, it installs dependencies from it; otherwise it installs `grpcio` and `grpcio-tools` by default.
+- Builds a Docker image (tag based on the script name unless you provide `image_name`).
+- Runs the container mapping host port 50051 to the container's 50051.
+
+Notes and troubleshooting:
+- Requires Docker installed and the current user able to run `docker` commands.
+- The script uses a temporary build directory and cleans up after itself.
+- If a container with the chosen name already exists it will be stopped/removed before starting a new one.
+
