@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import calculator_pb2 as calculator__pb2
+from example import calculator_pb2 as example_dot_calculator__pb2
 
 GRPC_GENERATED_VERSION = '1.75.1'
 GRPC_VERSION = grpc.__version__
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in calculator_pb2_grpc.py depends on'
+        + f' but the generated code in example/calculator_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -36,23 +36,23 @@ class CalculatorStub(object):
         """
         self.Add = channel.unary_unary(
                 '/calculator.Calculator/Add',
-                request_serializer=calculator__pb2.Request.SerializeToString,
-                response_deserializer=calculator__pb2.Reply.FromString,
+                request_serializer=example_dot_calculator__pb2.Request.SerializeToString,
+                response_deserializer=example_dot_calculator__pb2.Reply.FromString,
                 _registered_method=True)
         self.Sub = channel.unary_unary(
                 '/calculator.Calculator/Sub',
-                request_serializer=calculator__pb2.Request.SerializeToString,
-                response_deserializer=calculator__pb2.Reply.FromString,
+                request_serializer=example_dot_calculator__pb2.Request.SerializeToString,
+                response_deserializer=example_dot_calculator__pb2.Reply.FromString,
                 _registered_method=True)
         self.Multiply = channel.unary_unary(
                 '/calculator.Calculator/Multiply',
-                request_serializer=calculator__pb2.Request.SerializeToString,
-                response_deserializer=calculator__pb2.Reply.FromString,
+                request_serializer=example_dot_calculator__pb2.Request.SerializeToString,
+                response_deserializer=example_dot_calculator__pb2.Reply.FromString,
                 _registered_method=True)
         self.Divide = channel.unary_unary(
                 '/calculator.Calculator/Divide',
-                request_serializer=calculator__pb2.Request.SerializeToString,
-                response_deserializer=calculator__pb2.Reply.FromString,
+                request_serializer=example_dot_calculator__pb2.Request.SerializeToString,
+                response_deserializer=example_dot_calculator__pb2.Reply.FromString,
                 _registered_method=True)
 
 
@@ -88,23 +88,23 @@ def add_CalculatorServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Add': grpc.unary_unary_rpc_method_handler(
                     servicer.Add,
-                    request_deserializer=calculator__pb2.Request.FromString,
-                    response_serializer=calculator__pb2.Reply.SerializeToString,
+                    request_deserializer=example_dot_calculator__pb2.Request.FromString,
+                    response_serializer=example_dot_calculator__pb2.Reply.SerializeToString,
             ),
             'Sub': grpc.unary_unary_rpc_method_handler(
                     servicer.Sub,
-                    request_deserializer=calculator__pb2.Request.FromString,
-                    response_serializer=calculator__pb2.Reply.SerializeToString,
+                    request_deserializer=example_dot_calculator__pb2.Request.FromString,
+                    response_serializer=example_dot_calculator__pb2.Reply.SerializeToString,
             ),
             'Multiply': grpc.unary_unary_rpc_method_handler(
                     servicer.Multiply,
-                    request_deserializer=calculator__pb2.Request.FromString,
-                    response_serializer=calculator__pb2.Reply.SerializeToString,
+                    request_deserializer=example_dot_calculator__pb2.Request.FromString,
+                    response_serializer=example_dot_calculator__pb2.Reply.SerializeToString,
             ),
             'Divide': grpc.unary_unary_rpc_method_handler(
                     servicer.Divide,
-                    request_deserializer=calculator__pb2.Request.FromString,
-                    response_serializer=calculator__pb2.Reply.SerializeToString,
+                    request_deserializer=example_dot_calculator__pb2.Request.FromString,
+                    response_serializer=example_dot_calculator__pb2.Reply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -132,8 +132,8 @@ class Calculator(object):
             request,
             target,
             '/calculator.Calculator/Add',
-            calculator__pb2.Request.SerializeToString,
-            calculator__pb2.Reply.FromString,
+            example_dot_calculator__pb2.Request.SerializeToString,
+            example_dot_calculator__pb2.Reply.FromString,
             options,
             channel_credentials,
             insecure,
@@ -159,8 +159,8 @@ class Calculator(object):
             request,
             target,
             '/calculator.Calculator/Sub',
-            calculator__pb2.Request.SerializeToString,
-            calculator__pb2.Reply.FromString,
+            example_dot_calculator__pb2.Request.SerializeToString,
+            example_dot_calculator__pb2.Reply.FromString,
             options,
             channel_credentials,
             insecure,
@@ -186,8 +186,8 @@ class Calculator(object):
             request,
             target,
             '/calculator.Calculator/Multiply',
-            calculator__pb2.Request.SerializeToString,
-            calculator__pb2.Reply.FromString,
+            example_dot_calculator__pb2.Request.SerializeToString,
+            example_dot_calculator__pb2.Reply.FromString,
             options,
             channel_credentials,
             insecure,
@@ -213,8 +213,8 @@ class Calculator(object):
             request,
             target,
             '/calculator.Calculator/Divide',
-            calculator__pb2.Request.SerializeToString,
-            calculator__pb2.Reply.FromString,
+            example_dot_calculator__pb2.Request.SerializeToString,
+            example_dot_calculator__pb2.Reply.FromString,
             options,
             channel_credentials,
             insecure,

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package fleet;
+
+service FleetMonitor {
+  rpc StreamTelemetry (stream TelemetryData) returns (stream Alert);
+}
+
+message TelemetryData {
+  string van_id = 1;
+  double latitude = 2;
+  double longitude = 3;
+  float speed = 4;
+}
+
+message Alert {
+  string message = 1;
+}
