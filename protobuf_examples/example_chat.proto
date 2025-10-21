@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+// This defines the package, for some languages they will appear inside their own namespace
+// shouldn't affect anything on python, so just name it something no stupid
+package chat;
+
+/*
+* A 5 minute created protobuf example by Lucas
+* A "Chat" is a classic way to properly demonstrate gRPC
+*/
+service Chat {
+  // you declare an rpc using the "rpc" key word
+  // you declare a stream using the "stream" keyword
+  rpc LiveChatEvent (stream LiveChatRequest) returns (stream LiveChatRequest) {}
+
+  // left side represents client (caller) and right sight server (callee)
+  // rpc LiveChatEvent (stream LiveChatRequest) returns (stream LiveChatRequest) {}
+
+  // unidirectional stream (only declare stream on either side, not both)
+  // rpc LiveChatEvent (stream LiveChatRequest) returns (LiveChatRequest) {}
+
+  // standard unary request (very much like a function call)
+  rpc Sub (CreateGroupRequest) returns (CreateGroupResponse) {}
+}
+
+// so imagine you have a true live data streaming for a chat application
+// you can actually reuse the messaages between the client and server
+// because the send the same info back and forth
+
+// unlike a unary request, a stream establishes a channel, that you can send and recieve
+// gRPC serialised messages from.
+
+message LiveChatRequest {
+  // 1,2,3,4 specifies the ORDERING of the protocol buffer.
+  // just put something that makes sense.
+  // DO NOT skip numbers.
+  // DO NOT RE-USE numbers.
+  bytes chatUUID = 1;
+  string chatContent = 2;
+  string chatTitle = 3;
+}
+
+// EVERY message you want to send you must delcare a message
+// this will generate a data structure on the stubs, for you to create objects with
+// nice right? no need to do JSON shit.
+message CreateGroupRequest {
+  string chatName = 1;
+}
+
+message CreateGroupResponse{
+  bool isSuccess = 1;
+}
