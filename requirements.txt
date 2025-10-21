@@ -1,0 +1,4 @@
+# only if you refuse to use docker.
+grpcio
+grpcio-tools
+protobuf
